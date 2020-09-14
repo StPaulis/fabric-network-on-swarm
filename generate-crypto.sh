@@ -88,13 +88,13 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Generate anchor peer for ORG2 Org"
-echo "# ---------------------------------------------------------------------------"
-configtxgen -profile ${CHANNEL_PROFILE} -outputAnchorPeersUpdate ./config/Org2MSPanchors_${CHANNEL_NAME}.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org2MSP..."
-  exit 1
-fi
+# echo 
+# echo "# ---------------------------------------------------------------------------"
+# echo "# Generate anchor peer for ORG2 Org"
+# echo "# ---------------------------------------------------------------------------"
+# configtxgen -profile ${CHANNEL_PROFILE} -outputAnchorPeersUpdate ./config/Org2MSPanchors_${CHANNEL_NAME}.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+# if [ "$?" -ne 0 ]; then
+#   echo "Failed to generate anchor peer update for Org2MSP..."
+#   exit 1
+# fi
 

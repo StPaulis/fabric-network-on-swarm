@@ -37,13 +37,13 @@ Organizations:
             - Host: peer0.org1.example.com
               Port: 7051
 
-    - &Org2
-        Name: Org2MSP
-        ID: Org2MSP
-        MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
-        AnchorPeers:
-            - Host: peer0.org2.example.com
-              Port: 7051              
+    # - &Org2
+    #     Name: Org2MSP
+    #     ID: Org2MSP
+    #     MSPDir: crypto-config/peerOrganizations/org2.example.com/msp
+    #     AnchorPeers:
+    #         - Host: peer0.org2.example.com
+    #           Port: 7051              
 
 ################################################################################
 #
@@ -176,7 +176,7 @@ Profiles:
             MyConsortium:
                 Organizations:
                     - *Org1
-                    - *Org2
+                    # - *Org2
     
     MyChannel:
         Consortium: MyConsortium
@@ -184,7 +184,7 @@ Profiles:
             <<: *ApplicationDefaults
             Organizations:
                 - *Org1
-                - *Org2
+                # - *Org2
 
             
             Capabilities:

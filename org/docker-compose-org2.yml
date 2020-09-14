@@ -13,7 +13,7 @@ services:
                 max_attempts: 3
             placement: 
                 constraints: 
-                    - node.hostname == peer0.org2.example.com
+                    - node.hostname == playground_hyperledger
         image: hyperledger/fabric-peer:latest
         hostname: peer0.org2.example.com
         environment:

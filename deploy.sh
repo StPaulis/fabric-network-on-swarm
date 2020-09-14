@@ -80,10 +80,10 @@ echo "# ------------------------------------------------------------------------
 docker stack deploy --compose-file org/docker-compose-org1.yml org1
 sleep 3 
 
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Deploy Org2 nodes"
-echo "# ---------------------------------------------------------------------------"
-docker stack deploy --compose-file org/docker-compose-org2.yml org2
+# echo 
+# echo "# ---------------------------------------------------------------------------"
+# echo "# Deploy Org2 nodes"
+# echo "# ---------------------------------------------------------------------------"
+# docker stack deploy --compose-file org/docker-compose-org2.yml org2
 
 
