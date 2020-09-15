@@ -69,9 +69,9 @@ echo "# ------------------------------------------------------------------------
 docker exec "$CLI_NAME" peer channel update  -o "$ORDERER_NAME":7050 -c "$CHANNEL_NAME" -f "$ORG1_ANCHOR_TX" --tls --cafile $ORDERER_CA_LOCATION
 sleep 2
 
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Update anchor peer : Org2"
+# echo 
+# echo "# ---------------------------------------------------------------------------"
+# echo "# Update anchor peer : Org2"
 # echo "# ---------------------------------------------------------------------------"
 # docker exec \
 # 	-e "CORE_PEER_LOCALMSPID=Org2MSP" \
@@ -116,7 +116,7 @@ echo "# ------------------------------------------------------------------------
 echo "# Listing to installed chaincodes"
 echo "# ---------------------------------------------------------------------------"
 docker exec "$CLI_NAME" peer chaincode list --instantiated -C "$CHANNEL_NAME" --tls --cafile $ORDERER_CA_LOCATION
-sleep 10
+sleep 15
 
 echo 
 echo "# ---------------------------------------------------------------------------"

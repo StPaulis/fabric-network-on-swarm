@@ -14,7 +14,7 @@ services:
             placement: 
                 constraints: 
                     - node.hostname == playground_hyperledger
-        image: hyperledger/fabric-orderer:latest
+        image: hyperledger/fabric-orderer:1.4
         working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
         command: orderer
         hostname: orderer.example.com

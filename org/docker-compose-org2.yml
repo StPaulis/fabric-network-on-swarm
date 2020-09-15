@@ -14,7 +14,7 @@ services:
             placement: 
                 constraints: 
                     - node.hostname == playground_hyperledger
-        image: hyperledger/fabric-peer:latest
+        image: hyperledger/fabric-peer:1.4
         hostname: peer0.org2.example.com
         environment:
             - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
