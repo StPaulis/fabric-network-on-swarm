@@ -5,20 +5,20 @@ source .env
 # ---------------------------------------------------------------------------
 # Clear screen
 # ---------------------------------------------------------------------------
-clear
+ clear
 
-echo "# ---------------------------------------------------------------------------"
-echo "# Create Channel : mychannel"
-echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer channel create -o "$ORDERER_NAME":7050 -c "$CHANNEL_NAME" -f "$CHANNEL_TX_LOCATION" --tls --cafile $ORDERER_CA_LOCATION
-sleep 2
+ echo "# ---------------------------------------------------------------------------"
+ echo "# Create Channel : mychannel"
+ echo "# ---------------------------------------------------------------------------"
+ docker exec "$CLI_NAME" peer channel create -o "$ORDERER_NAME":7050 -c "$CHANNEL_NAME" -f "$CHANNEL_TX_LOCATION" --tls --cafile $ORDERER_CA_LOCATION
+ sleep 2
 
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Join channel : peer0.org1.example.com "
-echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer channel join -b "$CHANNEL_NAME".block --tls --cafile $ORDERER_CA_LOCATION
-sleep 2
+ echo 
+ echo "# ---------------------------------------------------------------------------"
+ echo "# Join channel : peer0.org1.example.com "
+ echo "# ---------------------------------------------------------------------------"
+ docker exec "$CLI_NAME" peer channel join -b "$CHANNEL_NAME".block --tls --cafile $ORDERER_CA_LOCATION
+ sleep 2
 
 # echo 
 # echo "# ---------------------------------------------------------------------------"
@@ -62,12 +62,12 @@ sleep 2
 # 	"$CLI_NAME" peer channel join -b "$CHANNEL_NAME".block --tls --cafile $ORDERER_CA_LOCATION
 # sleep 2
 
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Update anchor peer : Org1"
-echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer channel update  -o "$ORDERER_NAME":7050 -c "$CHANNEL_NAME" -f "$ORG1_ANCHOR_TX" --tls --cafile $ORDERER_CA_LOCATION
-sleep 2
+ echo 
+ echo "# ---------------------------------------------------------------------------"
+ echo "# Update anchor peer : Org1"
+ echo "# ---------------------------------------------------------------------------"
+ docker exec "$CLI_NAME" peer channel update  -o "$ORDERER_NAME":7050 -c "$CHANNEL_NAME" -f "$ORG1_ANCHOR_TX" --tls --cafile $ORDERER_CA_LOCATION
+ sleep 2
 
 # echo 
 # echo "# ---------------------------------------------------------------------------"
@@ -83,12 +83,12 @@ sleep 2
 # 	"$CLI_NAME" peer channel update  -o "$ORDERER_NAME":7050 -c "$CHANNEL_NAME" -f "$ORG2_ANCHOR_TX" --tls --cafile $ORDERER_CA_LOCATION
 # sleep 2
 
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Installing chaincode on org1"
-echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer chaincode install -n "$CHAINCODE_NAME" -p "$CHAINCODE_SRC" -v $CHAINCODE_VERSION -l node
-sleep 2
+ echo 
+ echo "# ---------------------------------------------------------------------------"
+ echo "# Installing chaincode on org1"
+ echo "# ---------------------------------------------------------------------------"
+ docker exec "$CLI_NAME" peer chaincode install -n "$CHAINCODE_NAME" -p "$CHAINCODE_SRC" -v $CHAINCODE_VERSION -l node
+ sleep 2
 
 # echo 
 # echo "# ---------------------------------------------------------------------------"
@@ -104,29 +104,29 @@ sleep 2
 # 	"$CLI_NAME" peer chaincode install -n "$CHAINCODE_NAME" -p "$CHAINCODE_SRC" -v $CHAINCODE_VERSION
 # sleep 2
 
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Instantiating chaincode
-echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer chaincode instantiate -o "$ORDERER_NAME":7050 -C "$CHANNEL_NAME" -l node -n "$CHAINCODE_NAME" "$CHAINCODE_SRC" -v $CHAINCODE_VERSION  -c '{"Args":["init", ""]}' -P "OR('Org1MSP.member', 'Org2MSP.member')" --tls --cafile $ORDERER_CA_LOCATION
-sleep 10 
+ echo 
+ echo "# ---------------------------------------------------------------------------"
+ echo "# Instantiating chaincode"
+ echo "# ---------------------------------------------------------------------------"
+ docker exec "$CLI_NAME" peer chaincode instantiate -o "$ORDERER_NAME":7050 -C "$CHANNEL_NAME" -l node -n "$CHAINCODE_NAME" "$CHAINCODE_SRC" -v $CHAINCODE_VERSION  -c '{"Args":["init", ""]}' -P "OR('Org1MSP.member', 'Org2MSP.member')" --tls --cafile $ORDERER_CA_LOCATION
+ sleep 10 
+
+ echo 
+ echo "# ---------------------------------------------------------------------------"
+ echo "# Listing to installed chaincodes"
+ echo "# ---------------------------------------------------------------------------"
+ docker exec "$CLI_NAME" peer chaincode list --instantiated -C "$CHANNEL_NAME" --tls --cafile $ORDERER_CA_LOCATION
+ sleep 15
+
+ echo 
+ echo "# ---------------------------------------------------------------------------"
+ echo "# Invoking chaincode : Init Record EgInit"
+ echo "# ---------------------------------------------------------------------------"
+ docker exec "$CLI_NAME" peer chaincode invoke -o "$ORDERER_NAME":7050 --tls --cafile $ORDERER_CA_LOCATION -C $CHANNEL_NAME -n $CHAINCODE_NAME -c '{"Args": ["voting_vote", "{ \"questionId\": \"EgInit\",    \"answerId\": \"EgInit\",    \"postId\": \"EgInit\",    \"userId\": \"Eg\" }" ] }'
+ sleep 5
 
 echo 
 echo "# ---------------------------------------------------------------------------"
-echo "# Listing to installed chaincodes"
+echo "# Query chaincode: Query"
 echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer chaincode list --instantiated -C "$CHANNEL_NAME" --tls --cafile $ORDERER_CA_LOCATION
-sleep 15
-
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Invoking chaincode : Move 10 from A to B"
-echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer chaincode invoke -o "$ORDERER_NAME":7050 --tls --cafile $ORDERER_CA_LOCATION -C $CHANNEL_NAME -n $CHAINCODE_NAME -c '{"Args": ["vote", { "questionId": "1",    "answerId": "1",    "postId": "1",    "userId": "1" } ] }'
-sleep 5
-
-echo 
-echo "# ---------------------------------------------------------------------------"
-echo "# Query chaincode: Query A"
-echo "# ---------------------------------------------------------------------------"
-docker exec "$CLI_NAME" peer chaincode query -o "$ORDERER_NAME":7050 --tls --cafile $ORDERER_CA_LOCATION -C $CHANNEL_NAME -n $CHAINCODE_NAME -c '{"Args":["getByPostId","1"]}'
+docker exec "$CLI_NAME" peer chaincode invoke -o "$ORDERER_NAME":7050 --tls --cafile $ORDERER_CA_LOCATION -C $CHANNEL_NAME -n $CHAINCODE_NAME -c '{"Args" :["voting_getByPostId","EgInit"]}'
