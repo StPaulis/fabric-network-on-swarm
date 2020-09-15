@@ -1,0 +1,51 @@
+import { ChaincodeTx } from '@worldsibu/convector-platform-fabric';
+import { ConvectorController } from '@worldsibu/convector-core';
+import { Voting } from './voting.model';
+export declare class VotingController extends ConvectorController<ChaincodeTx> {
+    vote(voting: Voting): Promise<string>;
+    getByPostId(postId: string): Promise<{
+        readonly type?: "io.worldsibu.blockchainVote";
+        id?: string;
+        postId?: string;
+        postIdType?: string;
+        questionId?: string;
+        questionIdType?: string;
+        answerId?: string;
+        answerIdType?: string;
+        userId?: string;
+        userIdType?: string;
+        sender?: string;
+        metadata?: string;
+        created?: number;
+        modified?: number;
+        update?: (content: {
+            readonly type?: "io.worldsibu.blockchainVote";
+            id?: string;
+            postId?: string;
+            postIdType?: string;
+            questionId?: string;
+            questionIdType?: string;
+            answerId?: string;
+            answerIdType?: string;
+            userId?: string;
+            userIdType?: string;
+            sender?: string;
+            metadata?: string;
+            created?: number;
+            modified?: number;
+            update?: any;
+            fetch?: (storageOptions?: any) => Promise<void>;
+            history?: () => Promise<import("@worldsibu/convector-core-model/dist/src/convector-model").History<Voting>[]>;
+            save?: (storageOptions?: any) => Promise<void>;
+            clone?: () => Voting;
+            toJSON?: (skipEmpty?: boolean) => any;
+            delete?: (storageOptions?: any) => Promise<void>;
+        }) => Promise<void>;
+        fetch?: (storageOptions?: any) => Promise<void>;
+        history?: () => Promise<import("@worldsibu/convector-core-model/dist/src/convector-model").History<Voting>[]>;
+        save?: (storageOptions?: any) => Promise<void>;
+        clone?: () => Voting;
+        toJSON?: (skipEmpty?: boolean) => any;
+        delete?: (storageOptions?: any) => Promise<void>;
+    }[]>;
+}
