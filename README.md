@@ -1,5 +1,5 @@
-## Fabric Network Orchestration Tool 
-This tool helps to setup Hyperledger Fabric Network by using Docker Swarm. By default, tool provides support to ordering service based on Solo, Kafka and Raft mode.
+## Fabric Network Orchestration Using Docker Swarm 
+This repo helps to setup Hyperledger Fabric Network by using Docker Swarm. By default, tool provides support to ordering service based on Solo, Kafka and Raft mode. In this forked version of the original repo, we define CouchDb as state database.
 
 **Tool Includes**
 * Support to multi VM Fabric Network setup.
@@ -8,14 +8,12 @@ This tool helps to setup Hyperledger Fabric Network by using Docker Swarm. By de
 
 ### Installation Guide
 Kindly install all the [Prerequisites](https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html) mentioned on the official documentation. Make sure we have all the Docker Images downloaded locally.
-For exploration, we will take 4 VM with below specification.
+For exploration, we will take 2 VM with below specification.
 
 |Organisation | VM Specification|
 |-------------|-----------------|
-|Swarm Master | 8GB, 2 vCPU     |
-|Org1         | 8GB, 2 vCPU     |
-|Org1         | 8GB, 2 vCPU     |
-|Orderer      | 16GB, 4 vCPU    |
+|Orderer      | 32GB, 8 vCPU    |
+|Org1         | 8GB,  2 vCPU    |
 
 ![Tool Architecture](img/architecture.png "Tool Architecture")
 
@@ -54,8 +52,6 @@ Now edit the .env file to add the Hostname Configuration. If you are not aware o
 
 ```bash     
     ORDERER_HOSTNAME=<orderer_hostname>
-    ORG1_HOSTNAME=<org1_hostname>
-    ORG2_HOSTNAME=<org2_hostname>
 ```
 
 **# Step 4**
