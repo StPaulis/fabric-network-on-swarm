@@ -4,6 +4,33 @@ networks:
         external:
             name: myNetwork
 services:
+    ca_org1:
+        deploy:
+            replicas: 1
+            restart_policy: 
+                condition: any
+                delay: 5s
+                max_attempts: 3
+            placement: 
+                constraints: 
+                    - node.hostname == egs01_ubuntu1804_hyperledger
+        image: hyperledger/fabric-ca:1.4
+        hostname: ca.org1.example.com
+        environment:
+            - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+            - FABRIC_CA_SERVER_CA_NAME=ca.org1.hurley.lab
+            - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
+            - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/b32619c5dd78ed431227ce43a9434806278fc8836edc58eba757784799ead206_sk
+        ports:
+            - "7054:7054"
+        command: fabric-ca-server start -b admin:adminpw -d
+        volumes:
+            - /var/mynetwork/certs/crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+        networks:
+            myNetwork: 
+                aliases:
+                    - ca.org1.example.com
+
     peer0_org1:
         deploy:
             replicas: 1
