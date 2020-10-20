@@ -2,6 +2,9 @@
   "name": "voting-api",
   "version": "0.1.0",
   "description": "Chaincodes api for voting package",
+  "scripts": {
+    "start": "pm2 start node -- apiserver.js;"
+  },
   "dependencies": {
     "body-parser": "~1.19.0",
     "express": "~4.17.1",
