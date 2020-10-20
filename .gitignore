@@ -2,3 +2,6 @@ config/*
 config/
 crypto-config/*
 crypto-config/
+apiserver/node_modules/*
+apiserver/node_modules/
+apiserver/package-lock.json

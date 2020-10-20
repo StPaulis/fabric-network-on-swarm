@@ -25,7 +25,7 @@ echo
 echo "# ---------------------------------------------------------------------------"
 echo "# Create directories to copy crypto material"
 echo "# ---------------------------------------------------------------------------"
-mkdir -p /var/mynetwork/chaincode /var/mynetwork/certs /var/mynetwork/bin /var/mynetwork/fabric-src
+mkdir -p /var/mynetwork/chaincode /var/mynetwork/certs /var/mynetwork/bin /var/mynetwork/fabric-src /var/mynetwork/network/
 
 echo 
 echo "# ---------------------------------------------------------------------------"
@@ -45,6 +45,7 @@ cp -R crypto-config /var/mynetwork/certs/
 cp -R config /var/mynetwork/certs/
 cp -R chaincodes/* /var/mynetwork/chaincode/
 cp -R bin/* /var/mynetwork/bin/
+cp -R network-config/* /var/mynetwork/network/
 
 echo "# ---------------------------------------------------------------------------"
 echo "# Create couchdb data folder if necessary"

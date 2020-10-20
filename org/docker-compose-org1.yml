@@ -18,7 +18,7 @@ services:
         hostname: ca.org1.example.com
         environment:
             - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-            - FABRIC_CA_SERVER_CA_NAME=ca.org1.hurley.lab
+            - FABRIC_CA_SERVER_CA_NAME=ca.org1.exapmle.com
             - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
             - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/b32619c5dd78ed431227ce43a9434806278fc8836edc58eba757784799ead206_sk
         ports:
@@ -144,3 +144,21 @@ services:
             - /var/mynetwork/bin/:/var/bin
         networks:
             - myNetwork
+
+        api:
+            deploy:
+                replicas: 1
+                restart_policy: 
+                    condition: on-failure
+                    delay: 5s
+                    max_attempts: 3
+                placement: 
+                    constraints: 
+                        - node.hostname == egs01_ubuntu1804_hyperledger
+            image: apiserver:0.0.1
+            tty: true
+            hostname: apiserver
+            volumes:
+                 - /var/mynetwork/network/
+            networks:
+                - myNetwork
